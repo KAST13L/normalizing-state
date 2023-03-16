@@ -1,9 +1,11 @@
 import React from 'react';
+import {PostsPage} from "./pages/PostsPage";
 
-export const App = () => {
+export const App: React.FC = () => {
+
     return (
         <div>
-          App
+            <PostsPage/>
         </div>
     );
 };
