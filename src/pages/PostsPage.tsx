@@ -17,7 +17,7 @@ export const PostsPage: React.FC = () => {
     return (
         <div style={{textAlign: 'center'}}>
             {items.map(el => <Post post={el} key={el.id}/>)}
-            <button  onClick={()=> console.log(store.getState().posts.items)}>show store</button>
+            store text: {store.getState().posts.items.map((el, index) => <span key={el.id}>{index+1}. {el.text}--- </span>)}
         </div>
     );
 };
