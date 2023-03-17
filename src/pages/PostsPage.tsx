@@ -15,9 +15,9 @@ export const PostsPage: React.FC = () => {
     },[dispatch])
 
     return (
-        <div>
+        <div style={{textAlign: 'center'}}>
             {items.map(el => <Post post={el} key={el.id}/>)}
-            <button onClick={()=> console.log(store.getState().posts.items)}>show store</button>
+            <button  onClick={()=> console.log(store.getState().posts.items)}>show store</button>
         </div>
     );
 };

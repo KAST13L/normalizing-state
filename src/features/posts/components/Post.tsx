@@ -25,7 +25,7 @@ export const Post: React.FC<PostPropsType> = ({post}) => {
 
 
     return (
-        <div style={{textAlign: 'center'}}>
+        <div>
             <b>
                 {editMode && <textarea value={text} onChange={(e) => {
                     setText(e.target.value)
