@@ -6,11 +6,14 @@ const initialState = {
     allIds: [] as string[]
 }
 
-export const mapToLookupTable = (arr: any[]) => {
+type LookupTableType<T> = { [key: string]: T }
+
+export const mapToLookupTable = <T extends { id: string }>(arr: T[]) => {
+    const acc: LookupTableType<T> = {};
     return arr.reduce((acc, item) => {
         acc[item.id] = item
         return acc
-    }, {})
+    }, acc)
 }
 
 export const postsReducer = (state = initialState, action: ActionsType
