@@ -9,9 +9,12 @@ interface PostPropsType {
 
 export const Post: React.FC<PostPropsType> = ({postId}) => {
 
-    const post = useSelector((state: AppStateType)  => state.posts.byId[postId])
-    console.log(post)
+    const post = useSelector((state: AppStateType) => state.posts.byId[postId])
+    // @ts-ignore
+    const author = useSelector((state: AppStateType) => state.authors.byId[post.authorId])
     const dispatch = useDispatch();
+
+    console.log(post)
 
     const [editMode, setEditMode] = useState<boolean>(false)
     const [text, setText] = useState<string>(post.text)
@@ -39,7 +42,7 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
             </span>
             <br/>
             <span>
-                Author: {post.author.name}
+                Author: {author.name}
             </span>
             <hr/>
         </div>

@@ -1,19 +1,17 @@
-import {AuthorType} from "../../api/api";
 import {FetchPostsSuccessACTypes, mapToLookupTable} from "./posts-reducer";
+import {PostType} from "../../api/api";
 
 const initialState = {
-    byId: {} as { [key: string]: AuthorType },
-    allIds: [] as string[]
+    byId: {} as { [key: string]: PostType },
 }
 
 
 export const authorsReducer = (state = initialState, action: FetchPostsSuccessACTypes
 ) => {
     switch (action.type) {
-        case "posts/fetchPostsSuccess":{
+        case "posts/fetchPostsSuccess": {
             return {
                 ...state,
-                allIds: action.payload.posts.map(p => p.author.id),
                 byId: mapToLookupTable(action.payload.posts.map(p => p.author))
             }
         }

@@ -1,4 +1,4 @@
-import {api, PostType} from "../../api/api";
+import {api, PostAPIType, PostType} from "../../api/api";
 import {Dispatch} from "react";
 
 const initialState = {
@@ -16,14 +16,24 @@ export const mapToLookupTable = <T extends { id: string }>(arr: T[]) => {
     }, acc)
 }
 
+type StateType = typeof initialState;
+
 export const postsReducer = (state = initialState, action: ActionsType
-) => {
+): StateType => {
     switch (action.type) {
         case 'posts/fetchPostsSuccess': {
             return {
                 ...state,
                 allIds: action.payload.posts.map(el => el.id),
-                byId: mapToLookupTable(action.payload.posts)
+                byId: mapToLookupTable(action.payload.posts.map(p => {
+                    const copy: PostType = {
+                        id: p.id,
+                        text: p.text,
+                        likes: p.likes,
+                        authorId: p.author.id
+                    }
+                    return copy
+                }))
             }
         }
         case "posts/updatePostTextSuccess": {
@@ -42,7 +52,7 @@ export const postsReducer = (state = initialState, action: ActionsType
     return state
 }
 
-export const fetchPostsSuccess = (posts: PostType[]) => ({
+export const fetchPostsSuccess = (posts: PostAPIType[]) => ({
     type: 'posts/fetchPostsSuccess',
     payload: {posts}
 } as const)
@@ -58,6 +68,7 @@ export const fetchPosts = () => async (dispatch: Dispatch<any>) => {
 
 export const updatePost = (postId: string, text: string) => async (dispatch: Dispatch<any>) => {
     const posts = await api.updatePost(postId, text)
+    if (posts) {}
     dispatch(updatePostTextSuccess(postId, text))
 }
 

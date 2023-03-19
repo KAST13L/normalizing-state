@@ -24,15 +24,22 @@ export interface AuthorType {
     name: string
 }
 
-export interface PostType {
+export interface PostAPIType {
     id: string
     text: string
     likes: number
     author: AuthorType
 }
 
+export interface PostType {
+    id: string
+    text: string
+    likes: number
+    authorId: string
+}
+
 export const api = {
-    getPosts(): Promise<PostType[]> {
+    getPosts(): Promise<PostAPIType[]> {
         return new Promise((res) => {
             setTimeout(() => {
                 res(array)
