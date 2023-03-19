@@ -15,23 +15,27 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
     const author = useSelector((state: AppStateType) => state.authors.byId[post.authorId])
     const dispatch = useDispatch();
 
-    const [editMode, setEditMode] = useState<boolean>(false)
-    const [editModee, setEditModee] = useState<boolean>(false)
+    const [editModeForText, setEditModeForText] = useState<boolean>(false)
+    const [editModeForAuthorName, setEditModeForAuthorName] = useState<boolean>(false)
     const [text, setText] = useState<string>(post.text)
     const [authorName, setAuthorName] = useState<string>(author?.name)
 
     return (
         <div>
             <b>
-                {editMode && <textarea autoFocus
-                                       value={text}
-                                       onChange={(e) => {setText(e.target.value)}}
-                                       onBlur={()=>{
-                                           // @ts-ignore
-                                           dispatch(updatePost(post.id, text))
-                                           setEditMode(() => false)}
-                                       }>{text}</textarea>}
-                {!editMode && <span onDoubleClick={() => setEditMode(() => true)}>{text}</span>}
+                {editModeForText && <textarea autoFocus
+                                              value={text}
+                                              onChange={(e) => {
+                                                  setText(e.target.value)
+                                              }}
+                                              onBlur={() => {
+                                                  // @ts-ignore
+                                                  dispatch(updatePost(post.id, text))
+                                                  setEditModeForText(() => false)
+                                              }
+                                              }>{text}</textarea>}
+                {!editModeForText && <span
+                    onDoubleClick={() => setEditModeForText(() => true)}>{text}</span>}
             </b>
             <br/>
             <span>
@@ -40,15 +44,18 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
             <br/>
             <span>
                 Author:
-                {editModee && <textarea autoFocus value={authorName}
-                                       onChange={(e) => {setAuthorName(e.target.value)}}
-                                       onBlur={()=>{
-                                           // @ts-ignore
-                                           dispatch(updateAuthorName(post.authorId, authorName))
-                                           setEditModee(() => false)
-                                       }}
+                {editModeForAuthorName && <textarea autoFocus value={authorName}
+                                                    onChange={(e) => {
+                                                        setAuthorName(e.target.value)
+                                                    }}
+                                                    onBlur={() => {
+                                                        // @ts-ignore
+                                                        dispatch(updateAuthorName(post.authorId, authorName))
+                                                        setEditModeForAuthorName(() => false)
+                                                    }}
                 >{authorName}</textarea>}
-                {!editModee && <span onDoubleClick={() => setEditModee(() => true)}>{authorName}</span>}
+                {!editModeForAuthorName && <span
+                    onDoubleClick={() => setEditModeForAuthorName(() => true)}>{authorName}</span>}
             </span>
             <hr/>
         </div>

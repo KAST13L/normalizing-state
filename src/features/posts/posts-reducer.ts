@@ -1,5 +1,7 @@
-import {api, PostAPIType, PostType} from "../../api/api";
+import {api, PostAPIType} from "../../api/api";
 import {Dispatch} from "react";
+
+export type PostType = Omit<PostAPIType, 'author'> & { authorId: string }
 
 const initialState = {
     byId: {} as { [key: string]: PostType },
@@ -56,6 +58,7 @@ export const fetchPostsSuccess = (posts: PostAPIType[]) => ({
     type: 'posts/fetchPostsSuccess',
     payload: {posts}
 } as const)
+
 export const updatePostTextSuccess = (postId: string, text: string) => ({
     type: 'posts/updatePostTextSuccess',
     payload: {postId, text}
