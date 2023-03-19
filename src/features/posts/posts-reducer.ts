@@ -6,16 +6,14 @@ const initialState = {
     allIds: [] as string[]
 }
 
-const mapToLookupTable = (arr: any[]) => {
+export const mapToLookupTable = (arr: any[]) => {
     return arr.reduce((acc, item) => {
         acc[item.id] = item
         return acc
     }, {})
 }
 
-export const postsReducer = (state = initialState, action:
-    | ReturnType<typeof fetchPostsSuccess>
-    | ReturnType<typeof updatePostTextSuccess>
+export const postsReducer = (state = initialState, action: ActionsType
 ) => {
     switch (action.type) {
         case 'posts/fetchPostsSuccess': {
@@ -30,7 +28,10 @@ export const postsReducer = (state = initialState, action:
                 ...state,
                 byId: {
                     ...state.byId,
-                    [action.payload.postId]: {...state.byId[action.payload.postId], text: action.payload.text}
+                    [action.payload.postId]: {
+                        ...state.byId[action.payload.postId],
+                        text: action.payload.text
+                    }
                 }
             }
         }
@@ -56,3 +57,8 @@ export const updatePost = (postId: string, text: string) => async (dispatch: Dis
     const posts = await api.updatePost(postId, text)
     dispatch(updatePostTextSuccess(postId, text))
 }
+
+// ACs types
+type ActionsType = FetchPostsSuccessACTypes | UpdatePostTextSuccessACTypes
+export type FetchPostsSuccessACTypes = ReturnType<typeof fetchPostsSuccess>
+export type UpdatePostTextSuccessACTypes = ReturnType<typeof updatePostTextSuccess>

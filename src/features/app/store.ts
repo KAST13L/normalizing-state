@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk';
-import {postsReducer} from "../posts/reducer";
+import {postsReducer} from "../posts/posts-reducer";
 
 const rootReducer = combineReducers({
     posts: postsReducer

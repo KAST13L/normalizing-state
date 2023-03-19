@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {updatePost} from "../reducer";
+import {updatePost} from "../posts-reducer";
 import {AppStateType} from "../../app/store";
 
 interface PostPropsType {
