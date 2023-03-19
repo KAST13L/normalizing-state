@@ -68,7 +68,8 @@ export const fetchPosts = () => async (dispatch: Dispatch<any>) => {
 
 export const updatePost = (postId: string, text: string) => async (dispatch: Dispatch<any>) => {
     const posts = await api.updatePost(postId, text)
-    if (posts) {}
+    if (posts) {
+    }
     dispatch(updatePostTextSuccess(postId, text))
 }
 

@@ -3,7 +3,7 @@ const array = [
         id: 'id1',
         text: 'hello my dear',
         likes: 10,
-        author: {id:'authorId1',name:'Eva'}
+        author: {id:'authorId3',name:'Sergio'}
     },
     {
         id: 'id2',
@@ -50,7 +50,14 @@ export const api = {
         return new Promise((res) => {
             setTimeout(() => {
                 res(array.map(el => el.id === postId ? {...el, text: text } : el))
-            },2000)
+            },1000)
+        })
+    },
+    updateAuthorName(authorId: string, name: string) {
+        return new Promise( (res) => {
+            setTimeout(() => {
+                res(array.map(el => el.author.id === authorId ? {...el, name: name } : el ))
+            },1000)
         })
     }
 }
