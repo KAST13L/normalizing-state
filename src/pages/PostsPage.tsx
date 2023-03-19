@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType, store} from "../features/app/store";
+import {AppStateType} from "../features/app/store";
 import {Post} from "../features/posts/components/Post";
 import {fetchPosts} from "../features/posts/reducer";
 
 export const PostsPage: React.FC = () => {
 
-    const ids = useSelector((state: AppStateType) => state.posts.allIds )
+    const ids = useSelector((state: AppStateType) => state.posts.allIds)
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         // @ts-ignore
         dispatch(fetchPosts())
-    },[dispatch])
+    }, [dispatch])
 
     return (
         <div style={{textAlign: 'center'}}>
