@@ -1,20 +1,20 @@
-export interface AuthorType {
+export interface AuthorAPIType {
     id: string
     name: string
 }
 
-export interface CommentType {
+export interface CommentAPIType {
     id: string
     text: string
-    author: AuthorType
+    author: AuthorAPIType
 }
 
 export interface PostAPIType {
     id: string
     text: string
     likes: number
-    author: AuthorType
-    lastComments: CommentType[]
+    author: AuthorAPIType
+    lastComments: CommentAPIType[]
 }
 
 const array: PostAPIType[] = [
@@ -70,7 +70,7 @@ export const api = {
             }, 1000)
         })
     },
-    getComments() {
+    getComments(postId: string) {
         return new Promise((res) => {
             setTimeout(() => {
                 res([

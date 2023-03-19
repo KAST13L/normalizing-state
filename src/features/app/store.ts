@@ -2,10 +2,12 @@ import {applyMiddleware, combineReducers, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk';
 import {postsReducer} from "../posts/posts-reducer";
 import {authorsReducer} from "../posts/authors-reducer";
+import {commentsReducer} from "../posts/comments-reducer";
 
 const rootReducer = combineReducers({
     posts: postsReducer,
-    authors: authorsReducer
+    authors: authorsReducer,
+    comments: commentsReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

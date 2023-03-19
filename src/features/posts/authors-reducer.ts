@@ -1,9 +1,13 @@
 import {FetchPostsSuccessACTypes, mapToLookupTable} from "./posts-reducer";
-import {api, AuthorType} from "../../api/api";
+import {api, AuthorAPIType} from "../../api/api";
 import {Dispatch} from "react";
 
+export type AuthorType = {
+    authorId: string
+}
+
 const initialState = {
-    byId: {} as { [key: string]: AuthorType },
+    byId: {} as { [key: string]: AuthorAPIType },
 }
 
 export const authorsReducer = (state = initialState, action: FetchPostsSuccessACTypes | ReturnType<typeof updateAuthorNameSuccess>

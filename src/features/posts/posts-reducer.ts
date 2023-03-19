@@ -1,7 +1,10 @@
 import {api, PostAPIType} from "../../api/api";
 import {Dispatch} from "react";
+import {fetchPostCommentsSuccess} from "./comments-reducer";
 
-export type PostType = Omit<PostAPIType, 'author'> & { authorId: string }
+export type PostType =
+    Omit<PostAPIType, 'author' | 'lastComments'>
+    & { authorId: string, commentsIds: string[] }
 
 const initialState = {
     byId: {} as { [key: string]: PostType },
@@ -32,10 +35,24 @@ export const postsReducer = (state = initialState, action: ActionsType
                         id: p.id,
                         text: p.text,
                         likes: p.likes,
-                        authorId: p.author.id
+                        authorId: p.author.id,
+                        commentsIds: p.lastComments.map(c => c.id)
                     }
                     return copy
                 }))
+            }
+        }
+        case "comments/fetchPostCommentsSuccess": {
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    [action.payload.postId]: {
+                        ...state.byId[action.payload.postId],
+                        commentsIds: action.payload.comments.map(c => c.id)
+                    }
+                }
+
             }
         }
         case "posts/updatePostTextSuccess": {
@@ -77,6 +94,6 @@ export const updatePost = (postId: string, text: string) => async (dispatch: Dis
 }
 
 // ACs types
-type ActionsType = FetchPostsSuccessACTypes | UpdatePostTextSuccessACTypes
+type ActionsType = FetchPostsSuccessACTypes | UpdatePostTextSuccessACTypes | ReturnType<typeof fetchPostCommentsSuccess>
 export type FetchPostsSuccessACTypes = ReturnType<typeof fetchPostsSuccess>
 export type UpdatePostTextSuccessACTypes = ReturnType<typeof updatePostTextSuccess>
