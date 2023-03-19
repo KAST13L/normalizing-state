@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
-import {PostType} from "../../../api/api";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {updatePost} from "../reducer";
+import {AppStateType} from "../../app/store";
 
 interface PostPropsType {
-    post: PostType
+    postId: string
 }
 
-export const Post: React.FC<PostPropsType> = React.memo(({post}) => {
+export const Post: React.FC<PostPropsType> = ({postId}) => {
+
+    const post = useSelector((state: AppStateType)  => state.posts.byId[postId])
     console.log(post)
     const dispatch = useDispatch();
 
@@ -42,4 +44,4 @@ export const Post: React.FC<PostPropsType> = React.memo(({post}) => {
             <hr/>
         </div>
     );
-});
+}

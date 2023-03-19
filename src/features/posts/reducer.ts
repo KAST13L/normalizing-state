@@ -1,9 +1,16 @@
 import {api, PostType} from "../../api/api";
 import {Dispatch} from "react";
-import {text} from "stream/consumers";
 
 const initialState = {
-    items: [] as PostType[]
+    byId: {} as { [key: string]: PostType },
+    allIds: [] as string[]
+}
+
+const mapToLookupTable = (arr: any[]) => {
+    return arr.reduce((acc, item) => {
+        acc[item.id] = item
+        return acc
+    }, {})
 }
 
 export const postsReducer = (state = initialState, action:
@@ -14,13 +21,17 @@ export const postsReducer = (state = initialState, action:
         case 'posts/fetchPostsSuccess': {
             return {
                 ...state,
-                items: action.payload.posts
+                allIds: action.payload.posts.map(el => el.id),
+                byId: mapToLookupTable(action.payload.posts)
             }
         }
         case "posts/updatePostTextSuccess": {
             return {
                 ...state,
-                items: state.items.map(el => el.id === action.payload.postId ? {...el, text: action.payload.text} : el)
+                byId: {
+                    ...state.byId,
+                    [action.payload.postId]: {...state.byId[action.payload.postId], text: action.payload.text}
+                }
             }
         }
     }

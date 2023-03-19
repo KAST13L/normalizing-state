@@ -6,7 +6,7 @@ import {fetchPosts} from "../features/posts/reducer";
 
 export const PostsPage: React.FC = () => {
 
-    const items = useSelector((state: AppStateType) => state.posts.items )
+    const ids = useSelector((state: AppStateType) => state.posts.allIds )
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -16,8 +16,7 @@ export const PostsPage: React.FC = () => {
 
     return (
         <div style={{textAlign: 'center'}}>
-            {items.map(el => <Post post={el} key={el.id}/>)}
-            store text: {store.getState().posts.items.map((el, index) => <span key={el.id}>{index+1}. {el.text}--- </span>)}
+            {ids.map(id => <Post postId={id} key={id}/>)}
         </div>
     );
 };
