@@ -23,11 +23,10 @@ export const Post: React.FC<PostPropsType> = ({post}) => {
         setEditMode(() => false)
     }
 
-
     return (
         <div>
             <b>
-                {editMode && <textarea value={text} onChange={(e) => {
+                {editMode && <textarea autoFocus value={text} onChange={(e) => {
                     setText(e.target.value)
                 }} onBlur={offEditModeHandler}>{text}</textarea>}
                 {!editMode && <span onDoubleClick={onEditModeHandler}>{text}</span>}
