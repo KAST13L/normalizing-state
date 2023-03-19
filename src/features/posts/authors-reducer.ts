@@ -5,7 +5,6 @@ const initialState = {
     byId: {} as { [key: string]: PostType },
 }
 
-
 export const authorsReducer = (state = initialState, action: FetchPostsSuccessACTypes
 ) => {
     switch (action.type) {
