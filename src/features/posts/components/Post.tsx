@@ -7,8 +7,8 @@ interface PostPropsType {
     post: PostType
 }
 
-export const Post: React.FC<PostPropsType> = ({post}) => {
-
+export const Post: React.FC<PostPropsType> = React.memo(({post}) => {
+    console.log(post)
     const dispatch = useDispatch();
 
     const [editMode, setEditMode] = useState<boolean>(false)
@@ -42,4 +42,4 @@ export const Post: React.FC<PostPropsType> = ({post}) => {
             <hr/>
         </div>
     );
-};
+});
