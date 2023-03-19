@@ -1,6 +1,7 @@
 import {FetchPostsSuccessACTypes, mapToLookupTable} from "./posts-reducer";
 import {api, AuthorAPIType} from "../../api/api";
 import {Dispatch} from "react";
+import {fetchPostCommentsSuccess} from "./comments-reducer";
 
 export type AuthorType = {
     authorId: string
@@ -10,13 +11,29 @@ const initialState = {
     byId: {} as { [key: string]: AuthorAPIType },
 }
 
-export const authorsReducer = (state = initialState, action: FetchPostsSuccessACTypes | ReturnType<typeof updateAuthorNameSuccess>
+export const authorsReducer = (state = initialState, action:
+    | FetchPostsSuccessACTypes
+    | ReturnType<typeof updateAuthorNameSuccess>
+    | ReturnType<typeof fetchPostCommentsSuccess>
 ) => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
             return {
                 ...state,
-                byId: mapToLookupTable(action.payload.posts.map(p => p.author))
+                byId: {
+                    ...state.byId,
+                    ...mapToLookupTable(action.payload.posts.map(p => p.author)),
+                    ...mapToLookupTable(action.payload.posts.map(p => p.lastComments).flat().map(c => c.author))
+                }
+            }
+        }
+        case "comments/fetchPostCommentsSuccess": {
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    ...mapToLookupTable(action.payload.comments.map(p => p.author))
+                }
             }
         }
         case "posts/updateAuthorNameSuccess": {
@@ -41,6 +58,7 @@ export const updateAuthorNameSuccess = (authorId: string, name: string) => ({
 
 export const updateAuthorName = (authorId: string, name: string) => async (dispatch: Dispatch<any>) => {
     const authors = await api.updateAuthorName(authorId, name)
-    if (authors) {}
+    if (authors) {
+    }
     dispatch(updateAuthorNameSuccess(authorId, name))
 }

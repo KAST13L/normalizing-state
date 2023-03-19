@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updatePost} from "../posts-reducer";
 import {AppStateType} from "../../app/store";
 import {updateAuthorName} from "../authors-reducer";
+import {Comment} from "./Comment";
 
 interface PostPropsType {
     postId: string
@@ -58,6 +59,12 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
                     onDoubleClick={() => setEditModeForAuthorName(() => true)}>{authorName}</span>}
             </span>
             <hr/>
+            <div>
+                Comments:
+                    {post.commentsIds.map(id => <Comment key={id} commentId={id}/>)}
+                <hr/>
+            </div>
+            <hr/><hr/>
         </div>
     );
 }

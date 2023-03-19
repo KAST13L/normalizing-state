@@ -9,7 +9,10 @@ const initialState = {
     byId: {} as { [key: string]: CommentsType },
 }
 
-export const commentsReducer = (state = initialState, action: FetchPostsSuccessACTypes | ReturnType<typeof fetchPostCommentsSuccess>) => {
+export const commentsReducer = (state = initialState, action:
+    | FetchPostsSuccessACTypes
+    | ReturnType<typeof fetchPostCommentsSuccess>
+) => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
             return {
