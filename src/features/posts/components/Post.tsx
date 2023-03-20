@@ -4,6 +4,7 @@ import {updatePost} from "../posts-reducer";
 import {AppStateType} from "../../app/store";
 import {updateAuthorName} from "../authors-reducer";
 import {Comment} from "./Comment";
+import {fetchPostComments} from "../comments-reducer";
 
 interface PostPropsType {
     postId: string
@@ -21,6 +22,7 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
     const [text, setText] = useState<string>(post.text)
     const [authorName, setAuthorName] = useState<string>(author?.name)
 
+    // @ts-ignore
     return (
         <div>
             <b>
@@ -58,13 +60,19 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
                 {!editModeForAuthorName && <span
                     onDoubleClick={() => setEditModeForAuthorName(() => true)}>{authorName}</span>}
             </span>
-            <hr/>
             <div>
                 Comments:
-                    {post.commentsIds.map(id => <Comment key={id} commentId={id}/>)}
+                {post.commentsIds.map(id => <Comment key={id} commentId={id}/>)}
                 <hr/>
+                <button onClick={() => {
+                    // @ts-ignore
+                    dispatch(fetchPostComments(postId))
+                }
+                }>get all comments
+                </button>
             </div>
-            <hr/><hr/>
+            <hr/>
+            <hr/>
         </div>
     );
 }

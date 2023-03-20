@@ -24,7 +24,7 @@ export const commentsReducer = (state = initialState, action:
                         .map(c => {
                             const comment: CommentsType = {
                                 id: c.id,
-                                text: c.author.id,
+                                text: c.text,
                                 authorId: c.author.id
                             }
                             return comment;
@@ -42,7 +42,7 @@ export const commentsReducer = (state = initialState, action:
                         .map(c => {
                             const comment: CommentsType = {
                                 id: c.id,
-                                text: c.author.id,
+                                text: c.text,
                                 authorId: c.author.id
                             }
                             return comment;
@@ -55,7 +55,7 @@ export const commentsReducer = (state = initialState, action:
     return state
 }
 
-export const fetchPostCommentsSuccess = (postId: string,comments: CommentAPIType[]) => ({
+export const fetchPostCommentsSuccess = (postId: string, comments: CommentAPIType[]) => ({
     type: 'comments/fetchPostCommentsSuccess',
     payload: {
         postId, comments

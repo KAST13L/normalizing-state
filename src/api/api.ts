@@ -77,13 +77,13 @@ export const api = {
         return new Promise((res) => {
             setTimeout(() => {
                 res([
-                    {id: '998', text: 'cool', author: {id: 'authorId3', name: 'Sergio'}},
+                    {id: '918', text: 'csool', author: {id: 'authorId3', name: 'Sergio'}},
                     {
-                        id: '997',
-                        text: 'root',
+                        id: '97',
+                        text: 'rofasot',
                         author: {id: 'authorId2', name: 'Evangelist'}
                     },
-                    {id: '996', text: 'bool', author: {id: 'authorId1', name: 'Yana'}}
+                    {id: '96', text: 'bodsol', author: {id: 'authorId1', name: 'Yana'}}
                 ])
             }, 1000)
         })
