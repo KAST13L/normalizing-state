@@ -43,7 +43,7 @@ const array: PostAPIType[] = [
         author: {id: 'authorId3', name: 'Sergio'},
         lastComments: [
             {id: '298', text: 'cool', author: {id: 'authorId4', name: 'Hinata'}},
-            {id: '297', text: 'root', author: {id: 'authorId5', name: 'Ricardo'}},
+            {id: '297', text: 'root', author: {id: 'authorId3', name: 'Sergio'}},
         ]
     },
 ]
@@ -66,7 +66,10 @@ export const api = {
     updateAuthorName(authorId: string, name: string) {
         return new Promise((res) => {
             setTimeout(() => {
-                res(array.map(el => el.author.id === authorId ? {...el, name: name} : el))
+                res(array.map(el => el.author.id === authorId ? {
+                    ...el,
+                    author: {...el.author, name: name}
+                } : el))
             }, 1000)
         })
     },
@@ -75,7 +78,11 @@ export const api = {
             setTimeout(() => {
                 res([
                     {id: '998', text: 'cool', author: {id: 'authorId3', name: 'Sergio'}},
-                    {id: '997', text: 'root', author: {id: 'authorId2', name: 'Evangelist'}},
+                    {
+                        id: '997',
+                        text: 'root',
+                        author: {id: 'authorId2', name: 'Evangelist'}
+                    },
                     {id: '996', text: 'bool', author: {id: 'authorId1', name: 'Yana'}}
                 ])
             }, 1000)

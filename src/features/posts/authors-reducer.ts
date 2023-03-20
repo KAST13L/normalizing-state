@@ -11,11 +11,13 @@ const initialState = {
     byId: {} as { [key: string]: AuthorAPIType },
 }
 
+type InitialStateType = typeof initialState
+
 export const authorsReducer = (state = initialState, action:
     | FetchPostsSuccessACTypes
     | ReturnType<typeof updateAuthorNameSuccess>
     | ReturnType<typeof fetchPostCommentsSuccess>
-) => {
+): InitialStateType => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
             return {
@@ -40,6 +42,7 @@ export const authorsReducer = (state = initialState, action:
             return {
                 ...state,
                 byId: {
+                    ...state.byId,
                     [action.payload.authorId]: {
                         ...state.byId[action.payload.authorId],
                         name: action.payload.name
