@@ -12,6 +12,7 @@ const initialState = {
 export const commentsReducer = (state = initialState, action:
     | FetchPostsSuccessACTypes
     | ReturnType<typeof fetchPostCommentsSuccess>
+    | ReturnType<typeof deletePostCommentSuccess>
 ) => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
@@ -51,6 +52,15 @@ export const commentsReducer = (state = initialState, action:
                 }
             }
         }
+        case "comments/deletePostCommentSuccess": {
+            const byIdCopy = {...state.byId}
+            delete byIdCopy[action.payload.commentId]
+
+            return {
+                ...state,
+                byId: byIdCopy
+            }
+        }
     }
     return state
 }
@@ -61,10 +71,23 @@ export const fetchPostCommentsSuccess = (postId: string, comments: CommentAPITyp
         postId, comments
     }
 } as const)
+export const deletePostCommentSuccess = (postId: string, commentId: string) => ({
+    type: 'comments/deletePostCommentSuccess',
+    payload: {
+        postId, commentId
+    }
+} as const)
 
 export const fetchPostComments = (postId: string) => async (dispatch: Dispatch<any>) => {
     const comments = await api.getComments(postId)
     // @ts-ignore
     dispatch(fetchPostCommentsSuccess(postId, comments))
+}
+export const deletePostComment = (postId: string, commentId: string) => async (dispatch: Dispatch<any>) => {
+    const result = await api.deletePostComment(postId, commentId)
+    if (result) {
+    }
+    // @ts-ignore
+    dispatch(deletePostCommentSuccess(postId, commentId))
 }
 

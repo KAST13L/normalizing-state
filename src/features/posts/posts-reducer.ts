@@ -1,6 +1,6 @@
 import {api, PostAPIType} from "../../api/api";
 import {Dispatch} from "react";
-import {fetchPostCommentsSuccess} from "./comments-reducer";
+import {deletePostCommentSuccess, fetchPostCommentsSuccess} from "./comments-reducer";
 
 export type PostType =
     Omit<PostAPIType, 'author' | 'lastComments'>
@@ -67,6 +67,19 @@ export const postsReducer = (state = initialState, action: ActionsType
                 }
             }
         }
+        case "comments/deletePostCommentSuccess": {
+
+            return {
+                ...state,
+                byId: {
+                    ...state.byId,
+                    [action.payload.postId]: {
+                        ...state.byId[action.payload.postId],
+                        commentsIds: state.byId[action.payload.postId].commentsIds.filter(id => id !== action.payload.commentId)
+                    }
+                }
+            }
+        }
     }
     return state
 }
@@ -94,6 +107,11 @@ export const updatePost = (postId: string, text: string) => async (dispatch: Dis
 }
 
 // ACs types
-type ActionsType = FetchPostsSuccessACTypes | UpdatePostTextSuccessACTypes | ReturnType<typeof fetchPostCommentsSuccess>
+type ActionsType =
+    FetchPostsSuccessACTypes
+    | UpdatePostTextSuccessACTypes
+    | ReturnType<typeof fetchPostCommentsSuccess>
+    | ReturnType<typeof deletePostCommentSuccess>
+
 export type FetchPostsSuccessACTypes = ReturnType<typeof fetchPostsSuccess>
 export type UpdatePostTextSuccessACTypes = ReturnType<typeof updatePostTextSuccess>

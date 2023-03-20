@@ -87,6 +87,11 @@ export const api = {
                 ])
             }, 1000)
         })
+    },
+    deletePostComment(postId: string, commentId: string) {
+        return new Promise((res) => {
+            res('ok')
+        })
     }
 }
 

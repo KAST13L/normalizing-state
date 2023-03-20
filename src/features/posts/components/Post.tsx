@@ -62,7 +62,7 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
             </span>
             <div>
                 Comments:
-                {post.commentsIds.map(id => <Comment key={id} commentId={id}/>)}
+                {post.commentsIds.map(id => <Comment postId={postId} key={id} commentId={id}/>)}
                 <hr/>
                 <button onClick={() => {
                     // @ts-ignore
