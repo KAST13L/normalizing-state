@@ -20,6 +20,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "typescript": "^4.4.2",
+    "weather-widget-test2": "^0.0.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
