@@ -1,7 +1,7 @@
 import {FetchPostsSuccessACTypes, mapToLookupTable} from "./posts-reducer";
 import {api, AuthorAPIType} from "../../api/api";
-import {Dispatch} from "react";
 import {fetchPostCommentsSuccess} from "./comments-reducer";
+import {AppDispatch} from "../app/store";
 
 export type AuthorType = {
     authorId: string
@@ -59,9 +59,8 @@ export const updateAuthorNameSuccess = (authorId: string, name: string) => ({
     payload: {authorId, name}
 } as const)
 
-export const updateAuthorName = (authorId: string, name: string) => async (dispatch: Dispatch<any>) => {
+export const updateAuthorName = (authorId: string, name: string) => async (dispatch: AppDispatch) => {
     const authors = await api.updateAuthorName(authorId, name)
-    if (authors) {
-    }
+    if (authors) {}
     dispatch(updateAuthorNameSuccess(authorId, name))
 }

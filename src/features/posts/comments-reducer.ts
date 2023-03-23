@@ -1,7 +1,7 @@
 import {FetchPostsSuccessACTypes, mapToLookupTable} from "./posts-reducer";
 import {api, CommentAPIType} from "../../api/api";
 import {AuthorType} from "./authors-reducer";
-import {Dispatch} from "react";
+import {AppDispatch} from "../app/store";
 
 export type CommentsType = Omit<CommentAPIType, 'author'> & AuthorType
 
@@ -78,16 +78,15 @@ export const deletePostCommentSuccess = (postId: string, commentId: string) => (
     }
 } as const)
 
-export const fetchPostComments = (postId: string) => async (dispatch: Dispatch<any>) => {
+export const fetchPostComments = (postId: string) => async (dispatch: AppDispatch) => {
     const comments = await api.getComments(postId)
     // @ts-ignore
     dispatch(fetchPostCommentsSuccess(postId, comments))
 }
-export const deletePostComment = (postId: string, commentId: string) => async (dispatch: Dispatch<any>) => {
+export const deletePostComment = (postId: string, commentId: string) => async (dispatch: AppDispatch) => {
     const result = await api.deletePostComment(postId, commentId)
     if (result) {
     }
-    // @ts-ignore
     dispatch(deletePostCommentSuccess(postId, commentId))
 }
 

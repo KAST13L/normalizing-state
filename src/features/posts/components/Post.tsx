@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {updatePost} from "../posts-reducer";
-import {AppStateType} from "../../app/store";
 import {updateAuthorName} from "../authors-reducer";
 import {Comment} from "./Comment";
 import {fetchPostComments} from "../comments-reducer";
+import {useAppSelector} from "../../app/hooks";
 
 interface PostPropsType {
     postId: string
@@ -12,9 +12,8 @@ interface PostPropsType {
 
 export const Post: React.FC<PostPropsType> = ({postId}) => {
 
-    const post = useSelector((state: AppStateType) => state.posts.byId[postId])
-    // @ts-ignore
-    const author = useSelector((state: AppStateType) => state.authors.byId[post.authorId])
+    const post = useAppSelector(state => state.posts.byId[postId])
+    const author = useAppSelector(state => state.authors.byId[post.authorId])
     const dispatch = useDispatch();
 
     const [editModeForText, setEditModeForText] = useState<boolean>(false)
@@ -22,7 +21,6 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
     const [text, setText] = useState<string>(post.text)
     const [authorName, setAuthorName] = useState<string>(author?.name)
 
-    // @ts-ignore
     return (
         <div>
             <b>
@@ -62,7 +60,8 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
             </span>
             <div>
                 Comments:
-                {post.commentsIds.map(id => <Comment postId={postId} key={id} commentId={id}/>)}
+                {post.commentsIds.map(id => <Comment postId={postId} key={id}
+                                                     commentId={id}/>)}
                 <hr/>
                 <button onClick={() => {
                     // @ts-ignore

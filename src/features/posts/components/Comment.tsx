@@ -1,18 +1,18 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../app/store";
+import {useDispatch} from "react-redux";
 import {deletePostComment} from "../comments-reducer";
+import {useAppSelector} from "../../app/hooks";
 
 type CommentPropsType = {
     commentId: string
     postId: string
 }
 
-export const Comment: React.FC<CommentPropsType> = ({commentId,postId}) => {
+export const Comment: React.FC<CommentPropsType> = ({commentId, postId}) => {
 
     const dispatch = useDispatch()
-    const comment = useSelector((state: AppStateType) => state.comments.byId[commentId])
-    const author = useSelector((state: AppStateType) => state.authors.byId[comment.authorId])
+    const comment = useAppSelector(state => state.comments.byId[commentId])
+    const author = useAppSelector(state => state.authors.byId[comment.authorId])
 
     return (
         <div style={{textAlign: 'center'}}>

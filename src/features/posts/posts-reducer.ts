@@ -1,6 +1,6 @@
 import {api, PostAPIType} from "../../api/api";
-import {Dispatch} from "react";
 import {deletePostCommentSuccess, fetchPostCommentsSuccess} from "./comments-reducer";
+import {AppDispatch} from "../app/store";
 
 export type PostType =
     Omit<PostAPIType, 'author' | 'lastComments'>
@@ -94,12 +94,12 @@ export const updatePostTextSuccess = (postId: string, text: string) => ({
     payload: {postId, text}
 } as const)
 
-export const fetchPosts = () => async (dispatch: Dispatch<any>) => {
+export const fetchPosts = () => async (dispatch: AppDispatch) => {
     const posts = await api.getPosts()
     dispatch(fetchPostsSuccess(posts))
 }
 
-export const updatePost = (postId: string, text: string) => async (dispatch: Dispatch<any>) => {
+export const updatePost = (postId: string, text: string) => async (dispatch: AppDispatch) => {
     const posts = await api.updatePost(postId, text)
     if (posts) {
     }
