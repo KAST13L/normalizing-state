@@ -75,6 +75,7 @@ export const postsReducer = (state = initialState, action: ActionsType
     return state
 }
 
+// ACs
 export const fetchPostsSuccess = (posts: PostAPIType[]) => ({
     type: 'posts/fetchPostsSuccess',
     payload: {posts}
@@ -85,6 +86,7 @@ export const updatePostTextSuccess = (postId: string, text: string) => ({
     payload: {postId, text}
 } as const)
 
+// thunks
 export const fetchPosts = () => async (dispatch: AppDispatch) => {
     const posts = await api.getPosts()
     dispatch(fetchPostsSuccess(posts))
