@@ -55,8 +55,7 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
                 {
                     !editModeForAuthorName &&
                     <span onDoubleClick={() => setEditModeForAuthorName(() => true)}>{authorName}</span>}
-                Comments: {post.commentsIds.map(id => <Comment postId={postId} key={id} commentId={id}/>)}
-                <hr/>
+                <div>Comments: {post.commentsIds.map(id => <Comment postId={postId} key={id} commentId={id}/>)}</div>
                 <button onClick={() => {
                     // @ts-ignore
                     dispatch(fetchPostComments(postId))
