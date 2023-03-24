@@ -32,9 +32,12 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
                                   // @ts-ignore
                                   dispatch(updatePost(post.id, text))
                                   setEditModeForText(() => false)}
-                    }>{text}</textarea>}
-                {!editModeForText &&
-                    <span onDoubleClick={() => setEditModeForText(() => true)}>{text}</span>}
+                    }>{text}</textarea>
+                }
+                {
+                    !editModeForText &&
+                    <span onDoubleClick={() => setEditModeForText(() => true)}>{text}</span>
+                }
             </b>
             <br/>
             <span>
