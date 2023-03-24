@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../features/app/store";
+import {useDispatch} from "react-redux";
 import {Post} from "../features/posts/components/Post";
 import {fetchPosts} from "../features/posts/posts-reducer";
+import {useAppSelector} from "../features/app/hooks";
 
 export const PostsPage: React.FC = () => {
 
-    const ids = useSelector((state: AppStateType) => state.posts.allIds)
+    const ids = useAppSelector(state => state.posts.allIds)
     const dispatch = useDispatch()
 
     useEffect(() => {
