@@ -1,6 +1,7 @@
 import {api, PostAPIType} from "../../api/api";
 import {deletePostCommentSuccess, fetchPostCommentsSuccess} from "./comments-reducer";
 import {AppDispatch} from "../app/store";
+import {mapToLookupTable} from "../app/hooks";
 
 export type PostType =
     Omit<PostAPIType, 'author' | 'lastComments'>
