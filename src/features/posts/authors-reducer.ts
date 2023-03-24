@@ -12,10 +12,10 @@ const initialState = {
     byId: {} as { [key: string]: AuthorAPIType },
 }
 
-type InitialStateType = typeof initialState
+type StateType = typeof initialState
 
 export const authorsReducer = (state = initialState, action: ActionsType
-): InitialStateType => {
+): StateType => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
             return {
@@ -52,11 +52,13 @@ export const authorsReducer = (state = initialState, action: ActionsType
     return state
 }
 
+// AC
 export const updateAuthorNameSuccess = (authorId: string, name: string) => ({
     type: 'posts/updateAuthorNameSuccess',
     payload: {authorId, name}
 } as const)
 
+// thunk
 export const updateAuthorName = (authorId: string, name: string) => async (dispatch: AppDispatch) => {
     const authors = await api.updateAuthorName(authorId, name)
     if (authors) {
