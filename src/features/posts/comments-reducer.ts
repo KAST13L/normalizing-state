@@ -10,8 +10,10 @@ const initialState = {
     byId: {} as { [key: string]: CommentsType },
 }
 
+type StateType = typeof initialState
+
 export const commentsReducer = (state = initialState, action: ActionsType
-) => {
+): StateType => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
             return {
