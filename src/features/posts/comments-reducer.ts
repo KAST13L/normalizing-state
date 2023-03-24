@@ -65,12 +65,14 @@ export const commentsReducer = (state = initialState, action: ActionsType
     return state
 }
 
+// ACs
 export const fetchPostCommentsSuccess = (postId: string, comments: CommentAPIType[]) => ({
     type: 'comments/fetchPostCommentsSuccess',
     payload: {
         postId, comments
     }
 } as const)
+
 export const deletePostCommentSuccess = (postId: string, commentId: string) => ({
     type: 'comments/deletePostCommentSuccess',
     payload: {
@@ -78,11 +80,13 @@ export const deletePostCommentSuccess = (postId: string, commentId: string) => (
     }
 } as const)
 
+// thunks
 export const fetchPostComments = (postId: string) => async (dispatch: AppDispatch) => {
     const comments = await api.getComments(postId)
     // @ts-ignore
     dispatch(fetchPostCommentsSuccess(postId, comments))
 }
+
 export const deletePostComment = (postId: string, commentId: string) => async (dispatch: AppDispatch) => {
     const result = await api.deletePostComment(postId, commentId)
     if (result) {
