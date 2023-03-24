@@ -11,16 +11,6 @@ const initialState = {
     allIds: [] as string[]
 }
 
-type LookupTableType<T> = { [key: string]: T }
-
-export const mapToLookupTable = <T extends { id: string }>(arr: T[]) => {
-    const acc: LookupTableType<T> = {};
-    return arr.reduce((acc, item) => {
-        acc[item.id] = item
-        return acc
-    }, acc)
-}
-
 type StateType = typeof initialState;
 
 export const postsReducer = (state = initialState, action: ActionsType
@@ -108,10 +98,7 @@ export const updatePost = (postId: string, text: string) => async (dispatch: App
 
 // ACs types
 type ActionsType =
-    FetchPostsSuccessACTypes
-    | UpdatePostTextSuccessACTypes
+    | ReturnType<typeof updatePostTextSuccess>
+    | ReturnType<typeof fetchPostsSuccess>
     | ReturnType<typeof fetchPostCommentsSuccess>
     | ReturnType<typeof deletePostCommentSuccess>
-
-export type FetchPostsSuccessACTypes = ReturnType<typeof fetchPostsSuccess>
-export type UpdatePostTextSuccessACTypes = ReturnType<typeof updatePostTextSuccess>

@@ -1,7 +1,8 @@
-import {FetchPostsSuccessACTypes, mapToLookupTable} from "./posts-reducer";
 import {api, AuthorAPIType} from "../../api/api";
 import {fetchPostCommentsSuccess} from "./comments-reducer";
 import {AppDispatch} from "../app/store";
+import {mapToLookupTable} from "../app/hooks";
+import {fetchPostsSuccess} from "./posts-reducer";
 
 export type AuthorType = {
     authorId: string
@@ -13,10 +14,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-export const authorsReducer = (state = initialState, action:
-    | FetchPostsSuccessACTypes
-    | ReturnType<typeof updateAuthorNameSuccess>
-    | ReturnType<typeof fetchPostCommentsSuccess>
+export const authorsReducer = (state = initialState, action: ActionsType
 ): InitialStateType => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
@@ -61,6 +59,14 @@ export const updateAuthorNameSuccess = (authorId: string, name: string) => ({
 
 export const updateAuthorName = (authorId: string, name: string) => async (dispatch: AppDispatch) => {
     const authors = await api.updateAuthorName(authorId, name)
-    if (authors) {}
+    if (authors) {
+    }
     dispatch(updateAuthorNameSuccess(authorId, name))
 }
+
+//types
+type ActionsType =
+    | ReturnType<typeof fetchPostsSuccess>
+    | ReturnType<typeof updateAuthorNameSuccess>
+    | ReturnType<typeof fetchPostCommentsSuccess>
+
