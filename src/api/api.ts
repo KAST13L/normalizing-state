@@ -90,7 +90,7 @@ export const api = {
     },
     deletePostComment(postId: string, commentId: string) {
         return new Promise((res) => {
-            res('ok')
+            res('ok', )
         })
     }
 }
