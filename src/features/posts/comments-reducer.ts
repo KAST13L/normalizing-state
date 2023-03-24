@@ -1,7 +1,8 @@
-import {FetchPostsSuccessACTypes, mapToLookupTable} from "./posts-reducer";
 import {api, CommentAPIType} from "../../api/api";
 import {AuthorType} from "./authors-reducer";
 import {AppDispatch} from "../app/store";
+import {fetchPostsSuccess} from "./posts-reducer";
+import {mapToLookupTable} from "../app/hooks";
 
 export type CommentsType = Omit<CommentAPIType, 'author'> & AuthorType
 
@@ -9,10 +10,7 @@ const initialState = {
     byId: {} as { [key: string]: CommentsType },
 }
 
-export const commentsReducer = (state = initialState, action:
-    | FetchPostsSuccessACTypes
-    | ReturnType<typeof fetchPostCommentsSuccess>
-    | ReturnType<typeof deletePostCommentSuccess>
+export const commentsReducer = (state = initialState, action: ActionsType
 ) => {
     switch (action.type) {
         case "posts/fetchPostsSuccess": {
@@ -90,3 +88,8 @@ export const deletePostComment = (postId: string, commentId: string) => async (d
     dispatch(deletePostCommentSuccess(postId, commentId))
 }
 
+//types
+type ActionsType =
+    | ReturnType<typeof fetchPostsSuccess>
+    | ReturnType<typeof fetchPostCommentsSuccess>
+    | ReturnType<typeof deletePostCommentSuccess>
