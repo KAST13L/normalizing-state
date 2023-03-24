@@ -24,19 +24,17 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
     return (
         <div>
             <b>
-                {editModeForText && <textarea autoFocus
-                                              value={text}
-                                              onChange={(e) => {
-                                                  setText(e.target.value)
-                                              }}
-                                              onBlur={() => {
-                                                  // @ts-ignore
-                                                  dispatch(updatePost(post.id, text))
-                                                  setEditModeForText(() => false)
-                                              }
-                                              }>{text}</textarea>}
-                {!editModeForText && <span
-                    onDoubleClick={() => setEditModeForText(() => true)}>{text}</span>}
+                {
+                    editModeForText &&
+                    <textarea autoFocus value={text}
+                              onChange={(e) => {setText(e.target.value)}}
+                              onBlur={() => {
+                                  // @ts-ignore
+                                  dispatch(updatePost(post.id, text))
+                                  setEditModeForText(() => false)}
+                    }>{text}</textarea>}
+                {!editModeForText &&
+                    <span onDoubleClick={() => setEditModeForText(() => true)}>{text}</span>}
             </b>
             <br/>
             <span>
