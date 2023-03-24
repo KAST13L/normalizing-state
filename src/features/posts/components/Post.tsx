@@ -40,25 +40,21 @@ export const Post: React.FC<PostPropsType> = ({postId}) => {
                 }
             </b>
             <br/>
-            <span>
-                likes: {post.likes}
-            </span>
+            likes: {post.likes}
             <br/>
-            <span>
                 Author:
-                {editModeForAuthorName && <textarea autoFocus value={authorName}
-                                                    onChange={(e) => {
-                                                        setAuthorName(e.target.value)
-                                                    }}
-                                                    onBlur={() => {
-                                                        // @ts-ignore
-                                                        dispatch(updateAuthorName(post.authorId, authorName))
-                                                        setEditModeForAuthorName(() => false)
-                                                    }}
-                >{authorName}</textarea>}
-                {!editModeForAuthorName && <span
-                    onDoubleClick={() => setEditModeForAuthorName(() => true)}>{authorName}</span>}
-            </span>
+                {
+                    editModeForAuthorName &&
+                    <textarea autoFocus value={authorName}
+                              onChange={(e) => {setAuthorName(e.target.value)}}
+                              onBlur={() => {
+                                  // @ts-ignore
+                                  dispatch(updateAuthorName(post.authorId, authorName))
+                                  setEditModeForAuthorName(() => false)
+                              }}>{authorName}</textarea>}
+                {
+                    !editModeForAuthorName &&
+                    <span onDoubleClick={() => setEditModeForAuthorName(() => true)}>{authorName}</span>}
             <div>
                 Comments:
                 {post.commentsIds.map(id => <Comment postId={postId} key={id}
