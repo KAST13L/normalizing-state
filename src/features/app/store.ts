@@ -15,6 +15,7 @@ export type AppStateType = ReturnType<typeof rootReducer>
 
 
 
+
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 // @ts-ignore
