@@ -19,7 +19,6 @@ export const PostsPage: React.FC = () => {
 
 
 
-
         // @ts-ignore
         dispatch(fetchPosts())
     }, [dispatch])
