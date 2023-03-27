@@ -11,7 +11,6 @@ export const PostsPage: React.FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-
         // @ts-ignore
         dispatch(fetchPosts())
     }, [dispatch])
