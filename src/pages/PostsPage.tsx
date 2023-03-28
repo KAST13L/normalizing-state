@@ -15,7 +15,6 @@ export const PostsPage: React.FC = () => {
         dispatch(fetchPosts())
 
 
-
     }, [dispatch])
 
     return (
