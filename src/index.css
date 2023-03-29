@@ -21,5 +21,6 @@
     justify-content: center;
     margin: 20px;
     cursor: grab;
-    background-color: coral;
+    background-color: gray;
+    font-size: xx-large;
 }

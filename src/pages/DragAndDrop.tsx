@@ -9,10 +9,11 @@ interface CardType {
 export const DragAndDrop = () => {
 
     const [cardList, setCardList] = useState<CardType[]>([
-        {id: 1, order: 1, title: 'Card One'},
-        {id: 2, order: 2, title: 'Card Two'},
-        {id: 3, order: 4, title: 'Card Three'},
-        {id: 4, order: 3, title: 'Card Four'}
+        {id: 1, order: 5, title: 'I'},
+        {id: 2, order: 2, title: 'II'},
+        {id: 3, order: 4, title: 'III'},
+        {id: 4, order: 3, title: 'IV'},
+        {id: 5, order: 1, title: 'V'}
     ])
     const [currentCard, setCurrentCard] = useState<CardType | any>(null)
 
@@ -21,7 +22,7 @@ export const DragAndDrop = () => {
     }
 
     function onDragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
-        e.currentTarget.style.background = 'coral'
+        e.currentTarget.style.background = 'gray'
     }
 
     function onDragEndHandler(e: React.DragEvent<HTMLDivElement>) {
@@ -44,7 +45,7 @@ export const DragAndDrop = () => {
             }
             return c
         }))
-        e.currentTarget.style.background = 'coral'
+        e.currentTarget.style.background = 'gray'
     }
 
     function sortCards (a: CardType, b: CardType) {
