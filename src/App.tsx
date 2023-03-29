@@ -1,10 +1,11 @@
 import React from 'react';
-import {PostsPage} from "./pages/PostsPage";
+import {DragAndDrop} from "./pages/DragAndDrop";
 
 export const App: React.FC = () => {
     return (
         <div>
-            <PostsPage/>
+            {/*<PostsPage/>*/}
+            <DragAndDrop/>
         </div>
     );
 };
