@@ -13,7 +13,8 @@ export const DragAndDrop = () => {
         {id: 2, order: 2, title: 'II'},
         {id: 3, order: 4, title: 'III'},
         {id: 4, order: 3, title: 'IV'},
-        {id: 5, order: 1, title: 'V'}
+        {id: 5, order: 1, title: 'V'},
+        {id: 5, order: 1, title: 'VI'},
     ])
     const [currentCard, setCurrentCard] = useState<CardType | any>(null)
 

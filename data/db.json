@@ -1,0 +1,28 @@
+{
+  "todos": [
+    {
+      "userId": 1,
+      "id": 1,
+      "title": "work and travel",
+      "completed": false
+    },
+    {
+      "userId": 2,
+      "id": 2,
+      "title": "fix bag",
+      "completed": false
+    },
+    {
+      "userId": 3,
+      "id": 3,
+      "title": "feat new",
+      "completed": true
+    },
+    {
+      "userId": 4,
+      "id": 4,
+      "title": "he did not want to play with me",
+      "completed": false
+    }
+  ]
+}
